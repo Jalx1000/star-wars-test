@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+import data from "./data.json";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Star Wars App", () => {
+  it("Should show a list of characters including Luke Skywalker", () => {
+    render(<App />);
+    expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
+  });
+});
+
+describe("Should show a lis of characters from a JSON file", () => {
+  it("Should show a list of characters including Luke Skywalker", () => {
+    render(<App />);
+    for (let character of data.results) {
+      expect(screen.getByText(character.name)).toBeInTheDocument();
+    }
+  });
 });
